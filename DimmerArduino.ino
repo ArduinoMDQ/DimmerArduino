@@ -1,26 +1,40 @@
+#include <TimerOne.h>
+
 const int analogInPin = A3;  // Analog input pin that the potentiometer is attached to
 const int ledPin = 9; // Analog output pin that the LED is attached to
+const int controlDrimer = 3;
 String inString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 int sensorValue;
 volatile int contador = 0;   // Somos de lo mas obedientes
+int t=0;
 
 
 void setup() {
-  // initialize serial communications at 9600 bps:
+
   Serial.begin(9600);
   pinMode(2, INPUT);
-  attachInterrupt(digitalPinToInterrupt(2),ServicioBoton,RISING);
-  Serial.println("listo");
+  pinMode(ledPin, OUTPUT);
+  pinMode(controlDrimer, OUTPUT);
+  
+  digitalWrite(controlDrimer,LOW);
+  attachInterrupt(digitalPinToInterrupt(2),zeroCross,FALLING );
+  
+  digitalWrite(ledPin,HIGH);
+  delay(100);
+  digitalWrite(ledPin,LOW);
+  Serial.println("Inicializado");
+
 }
 
 void loop() {
 
-   sensorValue = analogRead(analogInPin);
+  // sensorValue = analogRead(analogInPin);
    
 //  analogWrite(ledPin,sensorValue/4);
    
-while (Serial.available() > 0) {
+  while (Serial.available() > 0) {
+    
     int inChar = Serial.read();
    
     int valor=0;
@@ -40,24 +54,18 @@ while (Serial.available() > 0) {
       analogWrite(ledPin,valor);
     }
   }
-  
-   if ( contador > 0){
-    Serial.println(contador);
-    
-    }
 
 }
 
+void zeroCross(){
+  
+ Timer1.initialize(5000);
+ Timer1.attachInterrupt(Dimmer); 
+ digitalWrite(controlDrimer,LOW);
+}
 
-void ServicioBoton(){
-       if ( contador <= 100){
-        contador++ ;    
-        }
-       if ( contador > 100){
-        contador=0 ;    
-        }
-      
-        
-        
-    }
+void Dimmer(){
+  digitalWrite(controlDrimer,HIGH);
+ 
+}
 
