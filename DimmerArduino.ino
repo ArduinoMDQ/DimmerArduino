@@ -9,7 +9,7 @@ boolean stringComplete = false;  // whether the string is complete
 int sensorValue;
 volatile int contador = 0;   // Somos de lo mas obedientes
 int t=0;
-volatile int valor=50;
+volatile int valor=5;
 
 void setup() {
 
@@ -21,7 +21,7 @@ void setup() {
    
   noInterrupts();   
   attachInterrupt(digitalPinToInterrupt(2),zeroCross,RISING );
-  Serial.println("ingrese de 5 a 100 %");
+  Serial.print("100");
   interrupts(); 
 }
 
@@ -43,24 +43,24 @@ void loop() {
   //      Serial.println(inString);
     }
     // if you get a newline, print the string, then the string's value:
-    if (inChar == '\n') {
+  //  if (inChar == '\n') {
    //   Serial.print("Value:");
     //  Serial.println(inString.toInt());
       valor=inString.toInt();
-
+/*
       if(valor<5){
        valor=5;
        }
        if(valor>95){
         valor=95;
-       }
+       }*/
     
       Serial.print("valor: ");
-      Serial.println(valor);
+     Serial.println(valor);
       // clear the string for new input:
       inString = "";
     //  analogWrite(ledPin,valor);
-    }
+ //   }
   }
 
 }
@@ -68,7 +68,7 @@ void loop() {
 void zeroCross(){
  digitalWrite(controlDrimer,LOW);
  noInterrupts();
- Timer1.initialize(10000 -(valor*100));
+ Timer1.initialize(10000 -(valor*1000));
  Timer1.attachInterrupt(Dimmer);
  interrupts();
 }
