@@ -9,7 +9,7 @@ boolean stringComplete = false;  // whether the string is complete
 int sensorValue;
 volatile int contador = 0;   // Somos de lo mas obedientes
 int t=0;
-int valor=10000;
+volatile int valor=100;
 
 void setup() {
 
@@ -21,7 +21,7 @@ void setup() {
    
   noInterrupts();   
   attachInterrupt(digitalPinToInterrupt(2),zeroCross,RISING );
-  Serial.println("Inicializado");
+  Serial.println("ingrese de 0 a 100 %");
   interrupts(); 
 }
 
@@ -39,13 +39,13 @@ void loop() {
     if (isDigit(inChar)) {
       // convert the incoming byte to a char and add it to the string:
       inString += (char)inChar;
-       Serial.print("inString:");
-        Serial.println(inString);
+    //   Serial.print("inString:");
+  //      Serial.println(inString);
     }
     // if you get a newline, print the string, then the string's value:
     if (inChar == '\n') {
-      Serial.print("Value:");
-      Serial.println(inString.toInt());
+   //   Serial.print("Value:");
+    //  Serial.println(inString.toInt());
       valor=inString.toInt();
       Serial.print("valor: ");
       Serial.println(valor);
@@ -58,14 +58,15 @@ void loop() {
 }
 
 void zeroCross(){
- digitalWrite(controlDrimer,HIGH);
+ digitalWrite(controlDrimer,LOW);
  noInterrupts();
- Timer1.initialize(valor);
+ Timer1.initialize(10000 -(valor*100));
  Timer1.attachInterrupt(Dimmer);
  interrupts();
 }
 
 void Dimmer(){
-  digitalWrite(controlDrimer,LOW);
-}
+  Timer1.stop();
+  digitalWrite(controlDrimer,HIGH);
+  }
 
