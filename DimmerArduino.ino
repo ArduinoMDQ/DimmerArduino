@@ -9,7 +9,7 @@ boolean stringComplete = false;  // whether the string is complete
 int sensorValue;
 volatile int contador = 0;   // Somos de lo mas obedientes
 int t=0;
-volatile int valor=5;
+volatile int valor=9;
 
 void setup() {
 
@@ -21,7 +21,7 @@ void setup() {
    
   noInterrupts();   
   attachInterrupt(digitalPinToInterrupt(2),zeroCross,RISING );
-  Serial.print("100");
+  Serial.print("9");
   interrupts(); 
 }
 
@@ -55,8 +55,8 @@ void loop() {
         valor=95;
        }*/
     
-      Serial.print("valor: ");
-     Serial.println(valor);
+   //   Serial.print("valor: ");
+     Serial.print(valor);
       // clear the string for new input:
       inString = "";
     //  analogWrite(ledPin,valor);
