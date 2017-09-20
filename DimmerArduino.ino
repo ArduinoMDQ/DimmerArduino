@@ -43,24 +43,17 @@ void loop() {
   //      Serial.println(inString);
     }
     // if you get a newline, print the string, then the string's value:
-  //  if (inChar == '\n') {
+    if (inChar == '\n') {
    //   Serial.print("Value:");
     //  Serial.println(inString.toInt());
-      valor=inString.toInt();
-/*
-      if(valor<5){
-       valor=5;
-       }
-       if(valor>95){
-        valor=95;
-       }*/
-    
+      valor=inString.toInt();    
    //   Serial.print("valor: ");
-     Serial.print(valor);
+     Serial.println(valor);
       // clear the string for new input:
       inString = "";
+    //  valor="";
     //  analogWrite(ledPin,valor);
- //   }
+    }
   }
 
 }
