@@ -34,26 +34,26 @@ void loop() {
   while (Serial.available() > 0) {
     
     int inChar = Serial.read();
-   
+      valor="";
     
     if (isDigit(inChar)) {
       // convert the incoming byte to a char and add it to the string:
       inString += (char)inChar;
-    //   Serial.print("inString:");
-  //      Serial.println(inString);
+      valor=inString.toInt();   
+       Serial.print(valor);Serial.print("\r"); 
     }
     // if you get a newline, print the string, then the string's value:
-    if (inChar == '\n') {
+  //  if (inChar == '\n') {
    //   Serial.print("Value:");
     //  Serial.println(inString.toInt());
-      valor=inString.toInt();    
+      //valor=inString.toInt();    
    //   Serial.print("valor: ");
-     Serial.println(valor);
+     //Serial.print(valor);// Serial.print("\r");
       // clear the string for new input:
       inString = "";
-    //  valor="";
+   
     //  analogWrite(ledPin,valor);
-    }
+   // }
   }
 
 }
