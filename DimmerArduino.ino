@@ -39,21 +39,21 @@ void loop() {
     if (isDigit(inChar)) {
       // convert the incoming byte to a char and add it to the string:
       inString += (char)inChar;
-      valor=inString.toInt();   
-       Serial.print(valor);Serial.print("\r"); 
+      //valor=inString.toInt();   
     }
-    // if you get a newline, print the string, then the string's value:
-  //  if (inChar == '\n') {
-   //   Serial.print("Value:");
+    if (inChar == '\r') {
+    //  Serial.print("Value:");
     //  Serial.println(inString.toInt());
-      //valor=inString.toInt();    
-   //   Serial.print("valor: ");
-     //Serial.print(valor);// Serial.print("\r");
-      // clear the string for new input:
-      inString = "";
+    //  valor=inString.toInt();    
+    //  Serial.print("valor: ");
+    //  Serial.print(valor);// Serial.print("\r");
+    //  clear the string for new input:
+        valor=inString.toInt();   
+        Serial.print(valor);Serial.print("\r"); 
+        inString = "";
    
     //  analogWrite(ledPin,valor);
-   // }
+   }
   }
 
 }
@@ -61,7 +61,7 @@ void loop() {
 void zeroCross(){
  digitalWrite(controlDrimer,LOW);
  noInterrupts();
- Timer1.initialize(10000 -(valor*1000));
+ Timer1.initialize(10000 -(valor*100));
  Timer1.attachInterrupt(Dimmer);
  interrupts();
 }
