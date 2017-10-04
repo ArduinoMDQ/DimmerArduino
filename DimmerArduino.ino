@@ -61,7 +61,7 @@ void loop() {
 void zeroCross(){
  digitalWrite(controlDrimer,LOW);
  noInterrupts();
- Timer1.initialize(10000 -(valor*100));
+ Timer1.initialize(10000 -(valor*1000));
  Timer1.attachInterrupt(Dimmer);
  interrupts();
 }
